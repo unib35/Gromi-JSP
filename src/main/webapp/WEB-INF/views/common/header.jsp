@@ -34,14 +34,13 @@
             <div class="collapse navbar-collapse" id="navBoard">
                 <ul class="navbar-nav me-auto mb-2 mb-sm-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/">홈</a></li>
-                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/plant/list">식물 검색</a></li>
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/plant/list">식물 도감</a></li>
                     <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/plant/recommend">식물 추천</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?type=free">자유 게시판</a></li>
-                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?type=QA">Q&A 게시판</a></li>
-                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?type=sale">분양 게시판</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/free/list">자유 게시판</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/board/qa/list">Q&A 게시판</a></li>
                         </ul>
                     </li>
                 </ul>
