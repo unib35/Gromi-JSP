@@ -11,7 +11,7 @@ String uname = (String) session.getAttribute("user_name");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gromi</title>
+    <title>Gromi - 식물 관리의 시작</title>
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -24,7 +24,7 @@ String uname = (String) session.getAttribute("user_name");
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/ae70f4c5ab.js"
         crossorigin="anonymous"></script>
     <script
@@ -32,7 +32,6 @@ String uname = (String) session.getAttribute("user_name");
 
     <script>
     function clickedBtn(){
-        alert();
         // 로딩 표시
         showLoading();
         // 로딩 숨기기(2초 후)
@@ -63,6 +62,48 @@ String uname = (String) session.getAttribute("user_name");
         $("#mask").remove();
         $("#roadingStatus").hide();
     }
+
+    // 스크롤 애니메이션
+    $(document).ready(function() {
+        // 스크롤 이벤트 감지
+        $(window).scroll(function() {
+            $('.fade-in-section').each(function() {
+                var position = $(this).offset().top;
+                var scroll = $(window).scrollTop();
+                var windowHeight = $(window).height();
+                
+                if (scroll > position - windowHeight + 100) {
+                    $(this).addClass('visible');
+                }
+            });
+        });
+        
+        // 페이지 로드 시 한 번 실행
+        $(window).scroll();
+        
+        // 캐러셀에 인디케이터 추가
+        var carouselItems = $('#carouselExampleIndicators .carousel-inner .carousel-item').length;
+        var indicators = '<div class="carousel-indicators">';
+        
+        for (var i = 0; i < carouselItems; i++) {
+            var active = i === 0 ? 'active' : '';
+            indicators += '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '" class="' + active + '" aria-current="' + (i === 0 ? 'true' : 'false') + '" aria-label="Slide ' + (i+1) + '"></button>';
+        }
+        
+        indicators += '</div>';
+        $('#carouselExampleIndicators').append(indicators);
+        
+        // 캐러셀 컨트롤 추가
+        var controls = '<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">' +
+                      '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+                      '<span class="visually-hidden">Previous</span>' +
+                      '</button>' +
+                      '<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">' +
+                      '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+                      '<span class="visually-hidden">Next</span>' +
+                      '</button>';
+        $('#carouselExampleIndicators').append(controls);
+    });
     </script>
 
     <style>
@@ -73,7 +114,6 @@ String uname = (String) session.getAttribute("user_name");
         z-index: 1;
         width: 3rem;
         height: 3rem;
-
     }
 
     .nav-item {
@@ -90,18 +130,23 @@ String uname = (String) session.getAttribute("user_name");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
+        transition: transform 0.3s ease;
+        height: 100%;
+        width: 100%;
     }
 
     .bg-image2 {
         background-image:
             url('${pageContext.request.contextPath}/resources/images/bg-image2.jpg');
         background-size: cover;
+        transition: transform 0.3s ease;
     }
 
     .bg-image3 {
         background-image:
             url('${pageContext.request.contextPath}/resources/images/bg-image3.jpg');
         background-size: cover;
+        transition: transform 0.3s ease;
     }
 
     .bg-image4 {
@@ -110,24 +155,177 @@ String uname = (String) session.getAttribute("user_name");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
+        transition: transform 0.3s ease;
+        height: 100%;
+        width: 100%;
     }
 
     .bg-image5 {
         background-image:
             url('${pageContext.request.contextPath}/resources/images/bg-image5.jpg');
         background-size: cover;
+        transition: transform 0.3s ease;
     }
 
     .bg-image6 {
         background-image:
             url('${pageContext.request.contextPath}/resources/images/bg-image6.jpg');
         background-size: cover;
+        transition: transform 0.3s ease;
     }
 
     .bg-image7 {
         background-image:
             url('${pageContext.request.contextPath}/resources/images/bg-image7.jpg');
         background-size: cover;
+        transition: transform 0.3s ease;
+    }
+
+    /* 새로운 스타일 추가 */
+    .section-title {
+        position: relative;
+        margin-bottom: 30px;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        width: 50px;
+        height: 3px;
+        background-color: #28a745;
+        transform: translateX(-50%);
+    }
+
+    .btn-hover-effect {
+        transition: all 0.3s ease;
+        border: 2px solid #28a745;
+        color: #28a745;
+        background-color: transparent;
+        font-weight: 600;
+    }
+
+    .btn-hover-effect:hover {
+        background-color: #28a745;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+
+    .shadow-effect {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+    }
+
+    .shadow-effect:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        transform: translateY(-5px);
+    }
+
+    .feature-box {
+        padding: 20px;
+        border-radius: 10px;
+        background-color: white;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .feature-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .feature-icon {
+        font-size: 2.5rem;
+        color: #28a745;
+        margin-bottom: 15px;
+    }
+
+    .feature-title {
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .fade-in-section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in-section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .navbar {
+        transition: background-color 0.3s ease, padding 0.3s ease;
+        padding: 15px 0;
+    }
+
+    .navbar.scrolled {
+        padding: 8px 0;
+        background-color: rgba(33, 37, 41, 0.95) !important;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 미디어 쿼리 - 반응형 개선 */
+    @media (max-width: 768px) {
+        .nav-item {
+            padding-left: 0;
+        }
+        
+        .feature-box {
+            margin-bottom: 30px;
+        }
+        .img-container {
+            height: 350px;
+        }
+    }
+
+    /* 이미지 컨테이너 스타일 개선 */
+    .img-container {
+        overflow: hidden;
+        border-radius: 21px 21px 0 0;
+        height: 450px;
+        width: 100%;
+        position: relative;
+    }
+
+    /* 컨테이너 정렬 개선 */
+    .content-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+
+    @media (min-width: 768px) {
+        .content-container {
+            flex-direction: row;
+            gap: 30px;
+        }
+    }
+
+    .feature-container {
+        flex: 1;
+        max-width: 540px;
+        width: 100%;
+        margin-bottom: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    @media (max-width: 767px) {
+        .feature-container {
+            max-width: 100%;
+        }
     }
     </style>
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
@@ -212,13 +410,13 @@ String uname = (String) session.getAttribute("user_name");
             <span class="sr-only">Loading...</span>
         </div>
 
-        <div class="flex-md-equal p-3 p-md-5 m-md-3 text-center bg1">
+        <div class="flex-md-equal p-3 p-md-5 m-md-3 text-center bg1 fade-in-section">
             <div class="col-md-5 mx-auto my-3">
                 <h1 class="display-3 fw-bold">GROMI</h1>
                 <p class="lead fw-bold">
                     알고싶은 식물을 검색하고</br> 원하는 식물에 대해 찾아보세요!
                 </p>
-                <a class="btn btn-outline-secondary" onclick="clickedBtn()"
+                <a class="btn btn-hover-effect btn-lg" onclick="clickedBtn()"
                     href="${pageContext.request.contextPath}/plant/list">많은 식물 알아보기</a>
             </div>
             <div id="carouselExampleIndicators" class="carousel slide"
@@ -226,20 +424,20 @@ String uname = (String) session.getAttribute("user_name");
                 <!-- data-bs-interval : 슬라이드 지연 시간 -->
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="2000">
-                        <div class="bg-dark shadow-sm mx-auto bg-image5"
+                        <div class="bg-dark shadow-sm mx-auto bg-image5 shadow-effect"
                             style="width: 640px; height: 300px; border-radius: 21px 21px 0 0; background-size: cover;"></div>
 
                     </div>
                     <div class="carousel-item" data-bs-interval="2000">
-                        <div class="bg-dark shadow-sm mx-auto bg-image2"
+                        <div class="bg-dark shadow-sm mx-auto bg-image2 shadow-effect"
                             style="width: 640px; height: 300px; border-radius: 21px 21px 0 0; background-size: cover;"></div>
                     </div>
                     <div class="carousel-item" data-bs-interval="2000">
-                        <div class="bg-dark shadow-sm mx-auto bg-image6"
+                        <div class="bg-dark shadow-sm mx-auto bg-image6 shadow-effect"
                             style="width: 640px; height: 300px; border-radius: 21px 21px 0 0; background-size: cover;"></div>
                     </div>
                     <div class="carousel-item" data-bs-interval="2000">
-                        <div class="bg-dark shadow-sm mx-auto bg-image7"
+                        <div class="bg-dark shadow-sm mx-auto bg-image7 shadow-effect"
                             style="width: 640px; height: 300px; border-radius: 21px 21px 0 0;"></div>
                     </div>
                 </div>
@@ -247,32 +445,85 @@ String uname = (String) session.getAttribute("user_name");
 
         </div>
 
-
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-            <div
-                class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden ">
-                <div class="my-3 py-3">
-                    <h2 class="display-4 fw-bold">식물 추천</h2>
-                    <p class="lead fw-normal">그로미의 추천을 받아 당신의 식물을 찾아보세요.</p>
-                    <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/plant/recommend">식물
-                        추천 바로가기</a>
+        <!-- 새로운 섹션: 특징 소개 -->
+        <div class="container my-5 py-5 fade-in-section">
+            <h2 class="text-center mb-5 section-title">GROMI의 특별한 기능</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-box text-center shadow-effect">
+                        <i class="fas fa-search feature-icon"></i>
+                        <h4 class="feature-title">스마트 식물 검색</h4>
+                        <p>다양한 필터링 옵션으로 원하는 식물을 빠르게 찾아보세요.</p>
+                    </div>
                 </div>
-                <div class="bg-dark shadow-sm mx-auto bg-image4"
-                    style="width: 80%; height: 450px; border-radius: 21px 21px 0 0;"></div>
-            </div>
-            <div
-                class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden ">
-                <div class="my-3 p-3">
-                    <h2 class="display-4 fw-bold">커뮤니티</h2>
-                    <p class="lead fw-normal">당신의 식물을 공유해보세요.</p>
-                    <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/board/list?type=free">커뮤니티
-                        바로가기</a>
+                <div class="col-md-4">
+                    <div class="feature-box text-center shadow-effect">
+                        <i class="fas fa-lightbulb feature-icon"></i>
+                        <h4 class="feature-title">맞춤형 식물 추천</h4>
+                        <p>당신의 환경과 라이프스타일에 꼭 맞는 식물을 추천해드립니다.</p>
+                    </div>
                 </div>
-                <div class="bg-dark shadow-sm mx-auto bg-image"
-                    style="width: 70%; height: 450px; border-radius: 21px 21px 0 0;"></div>
+                <div class="col-md-4">
+                    <div class="feature-box text-center shadow-effect">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h4 class="feature-title">활발한 커뮤니티</h4>
+                        <p>다른 식물 애호가들과 소통하며 경험과 팁을 공유하세요.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
+        <div class="container-fluid px-0 my-5 fade-in-section">
+            <div class="content-container">
+                <div class="feature-container text-bg-dark pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden shadow-effect">
+                    <div class="my-3 py-3">
+                        <h2 class="display-4 fw-bold">식물 추천</h2>
+                        <p class="lead fw-normal">그로미의 추천을 받아 당신의 식물을 찾아보세요.</p>
+                        <a class="btn btn-hover-effect btn-lg" href="${pageContext.request.contextPath}/plant/recommend">식물
+                            추천 바로가기</a>
+                    </div>
+                    <div class="img-container mx-auto">
+                        <div class="bg-image4" style="width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+                <div class="feature-container bg-light pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden shadow-effect">
+                    <div class="my-3 p-3">
+                        <h2 class="display-4 fw-bold">커뮤니티</h2>
+                        <p class="lead fw-normal">당신의 식물을 공유해보세요.</p>
+                        <a class="btn btn-hover-effect btn-lg" href="${pageContext.request.contextPath}/board/list?type=free">커뮤니티
+                            바로가기</a>
+                    </div>
+                    <div class="img-container mx-auto">
+                        <div class="bg-image" style="width: 100%; height: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 새로운 섹션: 간단한 통계 -->
+        <div class="container my-5 py-5 text-center fade-in-section">
+            <h2 class="mb-5 section-title">GROMI와 함께하는 식물 생활</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="p-4">
+                        <h2 class="display-4 text-success">1,000+</h2>
+                        <p class="lead">식물 데이터베이스</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4">
+                        <h2 class="display-4 text-success">50,000+</h2>
+                        <p class="lead">행복한 사용자</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4">
+                        <h2 class="display-4 text-success">10,000+</h2>
+                        <p class="lead">커뮤니티 게시글</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
 
@@ -341,5 +592,16 @@ String uname = (String) session.getAttribute("user_name");
             </div>
         </div>
     </footer>
+    
+    <script>
+        // 스크롤 시 네비게이션 바 스타일 변경
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+    </script>
 </body>
 </html> 
