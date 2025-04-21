@@ -446,28 +446,35 @@ String uname = (String) session.getAttribute("user_name");
         </div>
 
         <!-- 새로운 섹션: 특징 소개 -->
-        <div class="container my-5 py-5 fade-in-section">
-            <h2 class="text-center mb-5 section-title">GROMI의 특별한 기능</h2>
-            <div class="row">
+        <div id="feature-section" class="container my-5">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2 class="section-title">주요 기능</h2>
+                </div>
+            </div>
+            <div class="row mt-4">
                 <div class="col-md-4">
-                    <div class="feature-box text-center shadow-effect">
+                    <div class="feature-box shadow-effect">
                         <i class="fas fa-search feature-icon"></i>
-                        <h4 class="feature-title">스마트 식물 검색</h4>
-                        <p>다양한 필터링 옵션으로 원하는 식물을 빠르게 찾아보세요.</p>
+                        <h3 class="feature-title">식물 도감</h3>
+                        <p>다양한 식물 정보를 검색하고 상세 정보를 확인해보세요.</p>
+                        <a href="${pageContext.request.contextPath}/plant/list" class="btn btn-hover-effect mt-2">식물 도감 바로가기</a>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="feature-box text-center shadow-effect">
-                        <i class="fas fa-lightbulb feature-icon"></i>
-                        <h4 class="feature-title">맞춤형 식물 추천</h4>
-                        <p>당신의 환경과 라이프스타일에 꼭 맞는 식물을 추천해드립니다.</p>
+                    <div class="feature-box shadow-effect">
+                        <i class="fas fa-seedling feature-icon"></i>
+                        <h3 class="feature-title">식물 추천</h3>
+                        <p>나에게 맞는 식물을 추천받고 가꾸는 방법을 배워보세요.</p>
+                        <a href="${pageContext.request.contextPath}/plant/recommend" class="btn btn-hover-effect mt-2">식물 추천 바로가기</a>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="feature-box text-center shadow-effect">
-                        <i class="fas fa-users feature-icon"></i>
-                        <h4 class="feature-title">활발한 커뮤니티</h4>
-                        <p>다른 식물 애호가들과 소통하며 경험과 팁을 공유하세요.</p>
+                    <div class="feature-box shadow-effect">
+                        <i class="fas fa-comments feature-icon"></i>
+                        <h3 class="feature-title">커뮤니티</h3>
+                        <p>다른 사용자들과 식물 정보를 공유하고 질문해보세요.</p>
+                        <a href="${pageContext.request.contextPath}/board/free/list" class="btn btn-hover-effect mt-2">커뮤니티 바로가기</a>
                     </div>
                 </div>
             </div>
