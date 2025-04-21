@@ -38,26 +38,54 @@ Gromi-JSP/
 │       ├── WEB-INF/         # 웹 설정 파일
 │       ├── js/              # JavaScript 파일
 │       └── *.jsp            # 주요 페이지 JSP 파일
+├── database/                # 데이터베이스 초기화 스크립트
+│   └── init.sql            # 데이터베이스 스키마 및 샘플 데이터
+├── docs/                    # 문서 디렉토리
 └── pom.xml                  # Maven 설정 파일
 ```
 
-## 설치 및 실행 방법
+## 설치 및 배포 가이드
+
+상세한 설치 및 배포 가이드는 다음 문서들을 참조하세요:
+
+- [설치 가이드](docs/installation.md) - 개발 환경 설정 및 설치 방법
+- [배포 가이드](docs/deployment.md) - 애플리케이션 배포 방법
+- [데이터베이스 설정](docs/database.md) - 데이터베이스 설정 및 관리
+
+### 빠른 시작
+
 1. 저장소 클론
-   ```
+   ```bash
    git clone https://github.com/your-username/Gromi-JSP.git
+   cd Gromi-JSP
    ```
 
-2. Maven 의존성 설치
-   ```
-   mvn install
+2. 데이터베이스 설정
+   ```bash
+   # MariaDB에 접속
+   mysql -u root -p
+   
+   # 데이터베이스 및 사용자 생성
+   CREATE DATABASE gromi_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   CREATE USER 'gromi_user'@'localhost' IDENTIFIED BY 'your_password';
+   GRANT ALL PRIVILEGES ON gromi_db.* TO 'gromi_user'@'localhost';
+   FLUSH PRIVILEGES;
+   EXIT;
+   
+   # 초기 데이터 임포트
+   mysql -u gromi_user -p gromi_db < database/init.sql
    ```
 
-3. 서버 배포 및 실행
-   - Apache Tomcat이나 기타 Servlet 컨테이너에 배포
+3. 배포 스크립트 실행
+   ```bash
+   chmod +x deploy.sh
+   ./deploy.sh
+   ```
 
-## 데이터베이스 설정
-- MariaDB 또는 MySQL 데이터베이스 필요
-- src/main/java/model 디렉토리의 데이터베이스 연결 클래스에서 설정 가능
+4. 웹 브라우저에서 접속
+   ```
+   http://localhost:8080
+   ```
 
 ## 기여자
 <table>
