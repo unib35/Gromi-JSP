@@ -60,9 +60,31 @@ Gromi-JSP/
 - src/main/java/model 디렉토리의 데이터베이스 연결 클래스에서 설정 가능
 
 ## 기여자
-- [@unib35](https://github.com/unib35)
-- [@KMINGON](https://github.com/KMINGON)
-- [@nuexs](https://github.com/nuexs)
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/unib35">
+        <img src="https://github.com/unib35.png" width="100px;" alt="unib35"/>
+        <br />
+        <sub><b>unib35</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/KMINGON">
+        <img src="https://github.com/KMINGON.png" width="100px;" alt="KMINGON"/>
+        <br />
+        <sub><b>KMINGON</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/nuexs">
+        <img src="https://github.com/nuexs.png" width="100px;" alt="nuexs"/>
+        <br />
+        <sub><b>nuexs</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## 라이센스
 이 프로젝트는 MIT 라이센스를 따릅니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
