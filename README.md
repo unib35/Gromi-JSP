@@ -1,2 +1,2 @@
-# Gromi-Plant-Community-Web
-# Gromi-Plant-Community-Web
+## 프로젝트 소개
+자바 스프링부트를 이용한 식물 정보 커뮤니티 구현

@@ -1,8 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%String boardType = request.getParameter("boardType"); %>
+<%@ page import="model.ConnectMysql"%>
+<%@ page import="model.boarddata.BoardDAO"%>
+<%@ page import="model.boarddata.Board"%>
+<%@ page import="java.util.ArrayList"%>
+<%
+String boardType = request.getParameter("boardType");
+String pageTemp = request.getParameter("page");
+Integer pageNum;
+if(pageTemp == null) pageNum = 1;
+else pageNum = Integer.parseInt(pageTemp);
+%>
 <!DOCTYPE html>
 <html lang="en">
+<%
+String uid = (String) session.getAttribute("user_id");
+String uname = (String) session.getAttribute("user_name");
+BoardDAO boardDAO = new BoardDAO();
+%>
 
 <head>
 <meta charset="UTF-8">
@@ -15,10 +30,17 @@
 	rel="stylesheet"
 	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
 	crossorigin="anonymous">
+<link href="./logo.css" rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/ae70f4c5ab.js"
+	crossorigin="anonymous"></script>
+<script
+	src="https://fonts.googleapis.com/css?family=Lato:300,400|Poppins:300,400,800&display=swap"></script>
+<link href="../footer.css" rel="stylesheet" type="text/css">
+<link href="../logo.css" rel="stylesheet" type="text/css">
 <style>
 .nav-item {
 	padding-left: 50px;
@@ -38,50 +60,89 @@
 	cursor: pointer;
 }
 </style>
+<style>
+  .fixed-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .ellipsis {
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+  }
+</style>
+
+
 </head>
 
 <body>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark"
 		aria-label="main-navbar">
 		<div class="container">
-			<a class="navbar-brand" href="../index.jsp">Gromi</a>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBoard"
+			<a class="navbar-brand" href="../index.jsp">
+            <div class="box">
+                <div class="title">
+                    <span class="block"></span>
+                    <h1>Gromi<span></span></h1>
+                </div>
+            </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navBoard"
                 aria-controls="navBoard" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navBoard">
-				<ul class="navbar-nav me-auto mb-2 mb-sm-0">
-					<li class="nav-item"><a class="nav-link" aria-current="page"
-						href="../index.jsp">홈</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">식물 추천</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">블로그</a></li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle active" href="#"
-						data-bs-toggle="dropdown" aria-expanded="false">커뮤니티</a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="viewBoard.jsp?boardType=free">자유 게시판</a></li>
-                            <li><a class="dropdown-item" href="viewBoard.jsp?boardType=QA">Q&A 게시판</a></li>
-                            <li><a class="dropdown-item" href="viewBoard.jsp?boardType=sale">분양 게시판</a></li>
-						</ul></li>
-				</ul>
-
-				<div class="justify-content-end">
-					<ul class="navbar-nav me-auto mb-2 mb-sm-0">
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							data-bs-toggle="dropdown" aria-expanded="false">마이페이지</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">Action</a></li>
-								<li><a class="dropdown-item" href="#">Another action</a></li>
-								<li><a class="dropdown-item" href="#">Something else
-										here</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</nav>
+            <div class="collapse navbar-collapse" id = "navBoard">
+                <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.jsp">홈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../gardenList.jsp">식물 검색</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../recommend.jsp">식물 추천</a>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                            aria-expanded="false">커뮤니티</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../board/viewBoard.jsp?boardType=free">자유 게시판</a></li>
+                            <li><a class="dropdown-item" href="../board/viewBoard.jsp?boardType=QA">Q&A 게시판</a></li>
+                            <li><a class="dropdown-item" href="../board/viewBoard.jsp?boardType=sale">분양 게시판</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <div class="justify-content-end">
+                    <ul class="navbar-nav me-auto mb-2 mb-sm-0">
+                        <li class="nav-item dropdown">
+                                <%if(uid == null) {%>
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                aria-expanded="false">마이페이지</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../login/signin.jsp">로그인</a></li>
+                                <li><a class="dropdown-item" href="../login/signup.jsp">회원가입</a></li>
+                            </ul>
+                            <%} else{%>
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                aria-expanded="false"><%=uname %></a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../login/editUser.jsp">개인정보수정</a></li>
+                                <li><a class="dropdown-item" href="../login/logout.jsp">로그아웃</a></li>
+                            </ul>
+                            <%} %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
 
 
 	<!--코드 작성 시작-->
@@ -89,39 +150,77 @@
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-lg-10">
-			<%if(boardType.equals("free")){ %>
+				<%
+				if (boardType == null || boardType.equals("free")) {
+					boardType = "free";
+				%>
 				<h1 class="mb-4">자유 게시판</h1>
-				<%} else if(boardType.equals("QA")){%>
-				<h1 class="mb-4"> Q&A 게시판</h1>
-				<%} else if(boardType.equals("sale")){%>
-				<h1 class="mb-4"> 분양 게시판</h1>
-				<%} %>
-				<table class="table">
+				<%
+				} else if (boardType.equals("QA")) {
+				%>
+				<h1 class="mb-4">Q&A 게시판</h1>
+				<%
+				} else if (boardType.equals("sale")) {
+				%>
+				<h1 class="mb-4">분양 게시판</h1>
+				<%
+				}
+				ArrayList<Board> boards = (ArrayList) boardDAO.findByBdType(boardType);
+				int postCnt = boards.size();
+				int pageCnt = 0;
+				if(postCnt%4 == 0) pageCnt = postCnt/4;
+				else pageCnt = postCnt/4 + 1;
+				int startPage = (pageNum - 1) * 4;
+				int lastPage = (pageNum * 4);
+				int nextPage = pageNum + 1;
+				if(nextPage > pageCnt) nextPage = pageCnt;
+				int prevPage = pageNum - 1;
+				if(prevPage < 1) prevPage = 1;
+				if(lastPage > postCnt) lastPage = postCnt;
+				
+				%>
+				<table class="table fixed-table">
 					<tbody>
-					<%for(int i = 0; i < 3; i++){ %>
+						<%
+						for (int i = startPage; i < lastPage; i++) {
+							Board board = boards.get(i);
+						%>
 						<tr class="border-bottom border-1 post-row"
-							onclick="location.href='viewPost.jsp'">
-							<td><strong>게시글 제목</strong><br> <small>내용
-									미리보기...</small><br> <span>작성자</span> · <span>2021-01-01</span> · <span>조회수 1</span></td>
+							onclick="location.href='viewPost.jsp?bdNo=<%=board.getBdNo() %>'">
+							<td><strong><%=board.getBdTitle() %></strong><br> 
+							<div class="ellipsis"><%=board.getBdContent() %></div> 
+							<span><%=board.getUserName() %></span> · 
+							<span><%=board.getBdDate() %></span> · 
+							<span>조회수 <%=board.getBdViewCnt() %></span></td>
 						</tr>
-						<%} %>
+						<%
+						}
+						%>
 					</tbody>
 				</table>
-				<div class="d-flex justify-content-center">
+				<div class="d-flex justify-content-between align-items-center">
 					<nav aria-label="Page navigation">
 						<ul class="pagination">
-							<li class="page-item disabled"><a class="page-link" href="#"
-								tabindex="-1">이전</a></li>
-							<li class="page-item active"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#">다음</a></li>
+							<li class="page-item"><a class="page-link" href="viewBoard.jsp?boardType=<%=boardType%>&page=<%=prevPage%>"
+								>이전</a></li>
+								<%for(int i = 1; i <= pageCnt; i++){ 
+								if(i == pageNum){%>
+							<li class="page-item active"><a class="page-link" href="#"><%=i%></a></li>
+							<%}else{ %>
+							<li class="page-item"><a class="page-link" href="viewBoard.jsp?boardType=<%=boardType%>&page=<%=i%>"><%=i%></a></li>
+							<%}}%>
+							<li class="page-item"><a class="page-link" href="viewBoard.jsp?boardType=<%=boardType%>&page=<%=nextPage%>">다음</a></li>
 						</ul>
 					</nav>
+					<button type="button" class="btn btn-outline-dark"
+						onclick=<%if (uid != null) {%> "location.href='createPost.jsp?boardType=<%=boardType %>'
+						"<%} else {%>"alert('로그인을 해주세요!')"<%}%>>게시글 작성</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
 
 	<!--코드 작성 종료-->
 
@@ -133,28 +232,61 @@
     </svg>
 
 
-	<div class="container">
-		<footer
-			class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-			<div class="col-md-4 d-flex align-items-center">
-				<a href="/"
-					class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+	<footer class="site-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-6">
+					<h6>Gromi</h6>
+					<p class="text-justify">
+						Company. 구름빵 | Owner. 이종민 <br>Businuess No. 051-890-1724 |
+						E-mail. cse@gmail.com <br> Address. 부산광역시 부산진구 엄광로176(가야동)
+					</p>
+				</div>
 
-					<img
-					src="https://starteacher-v5-upload.s3.ap-northeast-2.amazonaws.com/institute/logoaf34051b140f0305b0593ebd85bf43b1170b2268067bd03b3e7a0353b0df1c8e877810ac50891df6e550db9a15ab69fe"
-					width="30">
-				</a> <span class="mb-3 mb-md-0 text-muted">&copy; Goormbbang
-					Company, Inc</span>
+				<div class="col-xs-6 col-md-3">
+					<h6>Categories</h6>
+					<ul class="footer-links">
+						<li><a href="https://se.deu.ac.kr/se/index.do">ABOUT US</a></li>
+						<li><a href="./index.jsp">HOME</a></li>
+						<li><a href="./recommend.jsp">RECOMMEND</a></li>
+						<li><a href="./board/viewBoard.jsp?boardType=free">COMMUNITY</a></li>
+					</ul>
+				</div>
+
+				<div class="col-xs-6 col-md-3">
+					<h6>Social</h6>
+					<ul class="footer-links">
+						<li><a href="https://www.instagram.com/deu_smartcse/">CSE
+								Instagram</a></li>
+						<li><a href="https://open.kakao.com/o/gfoeUk8e">Cloud
+								Class Kakao</a></li>
+					</ul>
+				</div>
 			</div>
+			<hr>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-sm-6 col-xs-12">
+					<p class="copyright-text">Copyright &copy; Goormbbang Company,
+						All rights reserved.</p>
+				</div>
 
-			<ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-				<li class="ms-3"><a class="text-muted" href="#"><svg
-							class="bi" width="24" height="24">
-                            <use xlink:href="#instagram" />
-                        </svg></a></li>
-			</ul>
-		</footer>
-	</div>
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<ul class="social-icons">
+						<li><a class="facebook"
+							href="https://www.instagram.com/nuexsera/"><i
+								class="fa fa-instagram"></i></a></li>
+						<li><a class="twitter"
+							href="https://www.instagram.com/jongmln_/"><i
+								class="fa fa-instagram"></i></a></li>
+						<li><a class="dribbble"
+							href="https://www.instagram.com/min_gon_med._.j/"><i
+								class="fa fa-instagram"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
-
 </html>
