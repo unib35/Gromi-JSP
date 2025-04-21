@@ -1,0 +1,172 @@
+# ========================================
+# macOS 관련 무시 파일
+# ========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+*.icloud
+
+# ========================================
+# Python 관련 무시 파일
+# ========================================
+
+# Bytecode / 캐시
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C 확장
+*.so
+
+# 빌드 및 배포 관련
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# 설치 로그
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 테스트 및 커버리지
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# 번역 파일
+*.mo
+*.pot
+
+# 프레임워크별 설정
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask
+instance/
+.webassets-cache
+
+# Scrapy
+.scrapy
+
+# Sphinx 문서
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# 환경 설정 파일
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# pyenv
+# .python-version (필요에 따라 주석 해제)
+
+# pipenv
+# Pipfile.lock (협업 시 주석 해제 권장)
+
+# poetry
+# poetry.lock (패키지 고정용, 프로젝트에 따라 주석 해제 가능)
+# poetry.toml (로컬 구성, 일반적으로 무시)
+poetry.toml
+
+# pdm
+# pdm.lock (필요에 따라 주석 해제)
+.pdm.toml
+__pypackages__/
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath
+*.sage.py
+
+# 타입 검사기 및 정적 분석기
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+.pyrightconfig.json
+
+# Spyder / Rope
+.spyderproject
+.spyproject
+.ropeproject
+
+# mkdocs
+/site
+
+# ========================================
+# Visual Studio Code 관련 무시 파일
+# ========================================
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+.ionide
+
+# 확장 프로그램 빌드
+*.vsix
