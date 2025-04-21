@@ -18,7 +18,6 @@ String uname = (String) session.getAttribute("user_name");
         rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
         crossorigin="anonymous">
-    <link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/logo.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
     <script
@@ -245,57 +244,55 @@ String uname = (String) session.getAttribute("user_name");
     </svg>
 
 
-    <footer class="site-footer">
+    <footer class="navbar-dark bg-dark py-4 mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 col-md-6">
-                    <h6>Gromi</h6>
-                    <p class="text-justify">
+                    <h6 class="text-white">Gromi</h6>
+                    <p class="text-white-50">
                         Company. 구름빵 | Owner. 이종민 <br>Businuess No. 051-890-1724 |
                         E-mail. cse@gmail.com <br> Address. 부산광역시 부산진구 엄광로176(가야동)
                     </p>
                 </div>
 
                 <div class="col-xs-6 col-md-3">
-                    <h6>Categories</h6>
-                    <ul class="footer-links">
-                        <li><a href="https://se.deu.ac.kr/se/index.do">ABOUT US</a></li>
-                        <li><a href="${pageContext.request.contextPath}/">HOME</a></li>
-                        <li><a href="${pageContext.request.contextPath}/plant/recommend">RECOMMEND</a></li>
-                        <li><a href="${pageContext.request.contextPath}/board/list?type=free">COMMUNITY</a></li>
+                    <h6 class="text-white">Categories</h6>
+                    <ul class="list-unstyled">
+                        <li><a class="text-white-50 text-decoration-none" href="https://se.deu.ac.kr/se/index.do">ABOUT US</a></li>
+                        <li><a class="text-white-50 text-decoration-none" href="${pageContext.request.contextPath}/">HOME</a></li>
+                        <li><a class="text-white-50 text-decoration-none" href="${pageContext.request.contextPath}/plant/recommend">RECOMMEND</a></li>
+                        <li><a class="text-white-50 text-decoration-none" href="${pageContext.request.contextPath}/board/list?type=free">COMMUNITY</a></li>
                     </ul>
                 </div>
 
                 <div class="col-xs-6 col-md-3">
-                    <h6>Social</h6>
-                    <ul class="footer-links">
-                        <li><a href="https://www.instagram.com/deu_smartcse/">CSE
-                                Instagram</a></li>
-                        <li><a href="https://open.kakao.com/o/gfoeUk8e">Cloud
-                                Class Kakao</a></li>
+                    <h6 class="text-white">Social</h6>
+                    <ul class="list-unstyled">
+                        <li><a class="text-white-50 text-decoration-none" href="https://www.instagram.com/deu_smartcse/">CSE Instagram</a></li>
+                        <li><a class="text-white-50 text-decoration-none" href="https://open.kakao.com/o/gfoeUk8e">Cloud Class Kakao</a></li>
                     </ul>
                 </div>
             </div>
-            <hr>
+            <hr class="border-secondary">
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-sm-6 col-xs-12">
-                    <p class="copyright-text">Copyright &copy; Goormbbang Company,
+                    <p class="text-white-50 mb-0">Copyright &copy; Goormbbang Company,
                         All rights reserved.</p>
                 </div>
 
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <ul class="social-icons">
-                        <li><a class="facebook"
-                            href="https://www.instagram.com/nuexsera/"><i
-                                class="fa fa-instagram"></i></a></li>
-                        <li><a class="twitter"
-                            href="https://www.instagram.com/jongmln_/"><i
-                                class="fa fa-instagram"></i></a></li>
-                        <li><a class="dribbble"
-                            href="https://www.instagram.com/min_gon_med._.j/"><i
-                                class="fa fa-instagram"></i></a></li>
+                <div class="col-md-4 col-sm-6 col-xs-12 text-end">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <a class="text-white-50" href="https://www.instagram.com/nuexsera/"><i class="fa fa-instagram fa-lg"></i></a>
+                        </li>
+                        <li class="list-inline-item ms-3">
+                            <a class="text-white-50" href="https://www.instagram.com/jongmln_/"><i class="fa fa-instagram fa-lg"></i></a>
+                        </li>
+                        <li class="list-inline-item ms-3">
+                            <a class="text-white-50" href="https://www.instagram.com/min_gon_med._.j/"><i class="fa fa-instagram fa-lg"></i></a>
+                        </li>
                     </ul>
                 </div>
             </div>

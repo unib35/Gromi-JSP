@@ -71,6 +71,30 @@ body {
     padding-left: 15px;
 }
 
+/* 푸터 스타일 */
+footer a {
+    color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+footer .list-inline-item {
+    margin-bottom: 10px;
+}
+
+footer .fa {
+    transition: transform 0.3s;
+}
+
+footer .fa:hover {
+    transform: scale(1.2);
+}
+
 /* 인덱스 페이지 스타일 */
 .spinner-border{
     position: absolute;
