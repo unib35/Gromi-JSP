@@ -10,8 +10,10 @@
     <link href="${pageContext.request.contextPath}/resources/css/footer.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/logo.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/ae70f4c5ab.js" crossorigin="anonymous"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/plantcard.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="main-navbar">
